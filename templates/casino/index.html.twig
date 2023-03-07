@@ -1,21 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CasinoController!{% endblock %}
+{% block title %}MiniCasino!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="place-items-center">
+       <div class="relative">
+        <h1 class="result" id="resut"></h1>
+           <img src="{{ asset('images/rulette.png') }}" alt="rulette" class="w-1/2 m-auto rulette">
+           <img src="{{ asset('images/marker.png') }}" alt="marker" class="w-12 absolute top-0 left-0 right-0 bottom-100 m-auto rotate-180">
+       </div>
+    <div class="mt-3 text-center text-sm text-gray-500 dark:text-gray-300">
+       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+       <div class="text-3xl">
+         Your Balance:<span>{{ app.user.punkty }}</span>
+       </div>
+        
+        <div class="text-4xl">
+            <div class="inline-block float-left">
+                <label for="red" class="block text-sm text-gray-200 font-medium">red</label>
+                <input type="number" name="red" min="1" max="{{ app.user.punkty }}" class="w-96 shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2 mr-2"/>
+                    <div>
+                    <button type="submit" class="w-96 border dark:border-gray-100 rounded-md p-2 dark:bg-red-600 dark:border-transparent mt-2 mb-2 start">BET</button>
+                    </div>
+            </div>
+            <div class="inline-block float-left">
+                <label for="green" class="block text-sm text-gray-200 font-medium">Green</label>
+                <input type="number" name="green" min="1" max="{{ app.user.punkty }}" class="w-96 shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2 mr-2"/>
+                    <div>
+                    <button type="submit" class="w-96 border dark:border-gray-100 rounded-md p-2 dark:bg-green-600 dark:border-transparent mt-2 mb-2 start">BET</button>
+                    </div>
+            </div>
+            <div class="inline-block float-left">
+                <label for="black" class="block text-sm text-gray-200 font-medium">black</label>
+                <input type="number" name="black" min="1" max="{{ app.user.punkty }}" class="w-96 shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2 "/>
+                    <div>
+                    <button type="submit" class="w-96 border dark:border-gray-100 rounded-md p-2 dark:bg-gray-800 dark:border-transparent mt-2 mb-2 start">BET</button>
+                    </div>
+            </div>    
+        </div>
+        {% block javascript %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <script src="{{asset('js/script.js')}}"></script>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/mateu/miniCasinoProject/src/Controller/CasinoController.php'|file_link(0) }}">src/Controller/CasinoController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/mateu/miniCasinoProject/templates/casino/index.html.twig'|file_link(0) }}">templates/casino/index.html.twig</a></code></li>
-    </ul>
-     
-</div>
+        {% endblock %}
+
+        {% else %}
+        You have to be logged in to play
+        {% endif %}
+    </div>
+
+    </div>    
 {% endblock %}
