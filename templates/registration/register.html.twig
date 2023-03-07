@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+   </div>
+    <div class="container mx-auto">
+            {{ form_start(registrationForm) }}
+        <div>
+            {{ form_label(registrationForm.email, 'Enter the Email!', {'label_attr': { 'class': 'block text-sm text-gray-300 font-medium' }}) }}
+            {{ form_widget(registrationForm.email, {'attr':{ 'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2' }}) }} 
+            {{ form_errors(registrationForm.email) }}
+            </div>
+            <div class="">
+                <div>
+                    {{ form_label(registrationForm.plainPassword, 'Enter the password!', {'label_attr': { 'class': 'block text-sm text-gray-300 font-medium' }}) }}
+                    {{ form_widget(registrationForm.plainPassword, {'attr':{ 'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2' }}) }} 
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+              
+            </div>
+
+            <div class="flex items-center mt-4 mb-4">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'h-4 w-4 rounded border-gray border text-indigo-600 mr-2' }} )}}
+                {{ form_label(registrationForm.agreeTerms, 'Zgadam się na warunki użytkowania', {'label_attr': {'class': 'text-sm text-gray-700 dark:text-gray-300 font-medium '}})}}
+            </div>
+            <button type="submit" class="block w-full border dark:border-gray-100 rounded-md p-2 dark:bg-indigo-700 dark:border-transparent mt-2 mb-2">Register</button>
+    </div>
+    {{ form_end(registrationForm) }}
+{% endblock %}
