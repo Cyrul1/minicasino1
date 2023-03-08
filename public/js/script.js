@@ -1,6 +1,26 @@
 const rulette = document.querySelector('.rulette');
 const startButtons = document.querySelectorAll('.start');
 
+const redInput = document.querySelector('input[name="red"]');
+const greenInput = document.querySelector('input[name="green"]');
+const blackInput = document.querySelector('input[name="black"]');
+
+const redButton = document.querySelector('.btnred');
+const greenButton = document.querySelector('.btngreen');
+const blackButton = document.querySelector('.btnblack');
+
+function updateButtonDisabledState() {
+  redButton.disabled = !redInput.value;
+  greenButton.disabled = !greenInput.value;
+  blackButton.disabled = !blackInput.value;
+}
+
+redInput.addEventListener('input', updateButtonDisabledState);
+greenInput.addEventListener('input', updateButtonDisabledState);
+blackInput.addEventListener('input', updateButtonDisabledState);
+
+
+
 let state = {
   clickedButton: null,
   activeButton: null,
@@ -8,22 +28,23 @@ let state = {
 };
 
 function startRotation(event) {
-  const clickedButton = event.target;
-  startButtons.forEach(button => {
-    if (button !== clickedButton) {
-      button.style.pointerEvents = 'none';
-    }
-  });
-  clickedButton.style.pointerEvents = 'auto';
-  deg = Math.floor(5000 + Math.random()*5000);
-  rulette.style.transition = 'all 10s ease';
-  rulette.style.transform = `rotate(${deg}deg)`;
-  state = {
-    clickedButton,
-    activeButton: null,
-    isAnimationRunning: true
-  };
-}
+    const clickedButton = event.target;
+    startButtons.forEach(button => {
+      if (button !== clickedButton) {
+        button.style.pointerEvents = 'none';
+      }
+    });
+    clickedButton.style.pointerEvents = 'auto';
+    deg = Math.floor(5000 + Math.random()*5000);
+    rulette.style.transition = 'all 10s ease';
+    rulette.style.transform = `rotate(${deg}deg)`;
+    updateButtonDisabledState(); // Call the function to update the buttons' disabled state
+    state = {
+      clickedButton,
+      activeButton: null,
+      isAnimationRunning: true
+    };
+  }
 
 startButtons.forEach(button => {
   button.addEventListener('click', startRotation);
