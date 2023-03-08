@@ -3,9 +3,11 @@
 {% block title %}MiniCasino!{% endblock %}
 
 {% block body %}
+    
     <div class="place-items-center">
+        <h1 class="result dark:bg-gray-300 text-gray-500" id="result"></h1>
        <div class="relative">
-        <h1 class="result" id="resut"></h1>
+        
            <img src="{{ asset('images/rulette.png') }}" alt="rulette" class="w-1/2 m-auto rulette">
            <img src="{{ asset('images/marker.png') }}" alt="marker" class="w-12 absolute top-0 left-0 right-0 bottom-100 m-auto rotate-180">
        </div>
