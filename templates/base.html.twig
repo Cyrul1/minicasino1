@@ -23,7 +23,7 @@
     <body class="bg-green-200 text-grey-1000 m-10 dark:bg-green-800 dark:text-white">
     <div class="w-full md:w-2/3 mx-auto mb-4 flex justify-between items-center">
         <div class="text-4xl">
-            <a href="{{ path('app_casino') }}">Strona główna!</a>
+            <a href="{{ path('app_casino') }}">Casino Main Page!</a>
             {% block bread %}
                 
             {% endblock %}
@@ -33,13 +33,11 @@
             <div class=" text-sm text-gray-400 dark:text-gray-300 flex"> 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div>
-                    <a href="{{ path('app_proflie', {'id': app.user.id}) }}">Profile!</a>
+                    <a href="{{ path('app_proflie', {'id': app.user.id}) }}">Add points!</a>
                 </div>
-                <div class="ml-2">
-                   <a href="#">Ustawienia Profilu!</a>
-                </div>
+                
                  <div class="ml-2">
-                <a href="{{path('app_logout')}}"> Wyloguj się!</a>
+                <a href="{{path('app_logout')}}"> Logout!</a>
                 </div>
             {% else %}
                 <div>
